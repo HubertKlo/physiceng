@@ -20,14 +20,15 @@ void particle::integrate(float duration)
 
 Clock::Clock()
 {
-    last = std::chrono::high_resolution_clock::now();
+    auto last = std::chrono::high_resolution_clock::now();
 }
 
 float Clock::dt()
 {
+     auto last = std::chrono::high_resolution_clock::now();
      auto now = std::chrono::high_resolution_clock::now();
      std::chrono::duration<double> diff = now - last;
      last = now;
      return diff.count();
-    return 0.0f;
+     return 0.0f;
 }

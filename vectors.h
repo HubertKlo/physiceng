@@ -1,4 +1,5 @@
-#define Vectors
+#define vectors
+
 class point{
     friend class vector;
     private:
