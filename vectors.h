@@ -1,30 +1,34 @@
-#define vectors
-
+#define Vectors
+class vector;
 class point{
     friend class vector;
     private:
     float x,y;
     public:
-    point* get_point();
-    void set_point(float x,float y);
+    point& get_point();
+    float getx();
+    float gety();
+    void set_point(float x, float y);
+    void show_point();
     point();
     point(float x,float y);
+    point operator+(vector n);
 };
 class vector{
+    friend class point;
     private:
     float dx;
     float dy;
     public:
-    vector* get_vector();
+    vector& get_vector();
     void show_vector();
     void set_vector(float x,float y);
     float magintude()const;
     void normalize();
     vector();
     vector(point* p1,point* p2);
-    vector(point* p1,point* p2);
     vector(float p1,float p2);
-    vector operator*(const float d);
+    vector operator*(const float d)const;
     vector operator/(const float d);
     vector operator=(const vector n);
     vector operator+(const vector n)const;
