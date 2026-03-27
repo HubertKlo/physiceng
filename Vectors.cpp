@@ -3,15 +3,27 @@
 #include <cmath>
 #include <iostream>
 
-    point* point::get_point(){
-        return this;
+    point& point::get_point(){
+        return *this;
     }
-
-    void point::set_point(float x,float y){
+    float point::getx(){
+        return this->x;
+    }
+    float point::gety()
+    {
+        return this->y;
+    }
+    void point::set_point(float x, float y)
+    {
         this->x=x;  
         this->y=y;
     }
-    point::point(){
+    void point::show_point()
+    {
+        std::cout<<"pos x: "<<this->x<<" pos y: "<<this->y<<std::endl;
+    }
+    point::point()
+    {
         x=0;
         y=0;
     }
@@ -20,11 +32,12 @@
         this->y=y;
     }
 
-    vector* vector::get_vector(){
-        return this;
+    
+    vector& vector::get_vector(){
+        return *this;
     }
     void vector::show_vector(){
-        std::cout<<"["<<this->get_vector()->dx<<","<<this->get_vector()->dy<<"]"<<std::endl;
+        std::cout<<"["<<this->dx<<","<<this->dy<<"]"<<std::endl;
     }
     void vector::set_vector(float x,float y){
        this-> dy=y;
@@ -41,8 +54,8 @@
         this->dy = 0;
     }
     vector::vector(point* p1,point* p2){
-        this->dx=p1->get_point()->x - p2->get_point()->x;
-        this->dy=p1->get_point()->y - p2->get_point()->y;
+        this->dx=p1->x - p2->x;
+        this->dy=p1->y - p2->y;
     }
 
     vector::vector(float p1, float p2)
@@ -50,11 +63,9 @@
         this->dx = p1;
         this->dy = p2;
     }
-    vector vector::operator*(float d)
+    vector vector::operator*(float d)const
     {
-        this->dx=this->dx * d;
-        this->dy=this->dy * d;
-        return *this;
+        return vector(dx * d,dy * d);
     }
     vector vector::operator/(const float d)
     {
@@ -73,7 +84,7 @@
  
     vector vector::operator+(const vector n)const
     {
-        return vector(this->dx+n.dx,this->dy+n.dy);
+        return vector(dx+n.dx,dy+n.dy);
     }
 
     vector vector::operator-(const vector n) const
@@ -91,11 +102,22 @@
         float prod = v1->dx*v2->dx + v1->dy*v2->dy; 
         return prod;
     }
-    
-    void vector::normalize() 
+    float vector::get_x(){
+        return dx;
+    }
+    float vector::get_y()
+    {
+        return dy;
+    }
+    void vector::normalize()
     {
         const float m = this->magintude();
         if(m>0){
             *this=(*this)/m;
         }
+    }
+
+    point point::operator+(vector n) 
+    {
+        return point(this->x+n.dx,this->y+n.dy);
     }
