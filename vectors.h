@@ -23,6 +23,8 @@ class vector{
     vector& get_vector();
     void show_vector();
     void set_vector(float x,float y);
+    float get_x();
+    float get_y();
     float magintude()const;
     void normalize();
     vector();

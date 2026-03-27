@@ -102,8 +102,14 @@
         float prod = v1->dx*v2->dx + v1->dy*v2->dy; 
         return prod;
     }
-    
-    void vector::normalize() 
+    float vector::get_x(){
+        return dx;
+    }
+    float vector::get_y()
+    {
+        return dy;
+    }
+    void vector::normalize()
     {
         const float m = this->magintude();
         if(m>0){

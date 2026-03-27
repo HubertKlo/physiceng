@@ -1,0 +1,8 @@
+class collision{
+    public:
+    
+    
+    private:
+
+
+};
