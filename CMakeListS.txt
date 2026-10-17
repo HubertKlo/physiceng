@@ -1,0 +1,25 @@
+cmake_minimum_required(VERSION 3.20)
+
+project(PhysicSDL LANGUAGES CXX)
+
+set(SDL2_DIR "${CMAKE_CURRENT_SOURCE_DIR}/SDL2-2.32.2/x86_64-w64-mingw32/lib/cmake/SDL2")
+
+find_package(SDL2 REQUIRED)
+
+add_executable(PhysicSDL
+    src/main.cpp
+)
+
+target_include_directories(PhysicSDL PRIVATE inc)
+
+target_link_libraries(PhysicSDL PRIVATE SDL2::SDL2)
+
+target_link_options(PhysicSDL PRIVATE -mconsole)
+
+target_compile_definitions(PhysicSDL PRIVATE SDL_MAIN_HANDLED)
+
+add_custom_command(TARGET PhysicSDL POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    "${CMAKE_CURRENT_SOURCE_DIR}/SDL2-2.32.2/x86_64-w64-mingw32/bin/SDL2.dll"
+    "$<TARGET_FILE_DIR:PhysicSDL>"
+)
